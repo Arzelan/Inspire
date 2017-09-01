@@ -13,7 +13,7 @@ if (!empty($meta)) {
 			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
 				<header class="entry-header">
 					<?php the_title( '<h1 class="title" itemprop="name">', '</h1>' ); ?>
-					<div class="meta">Published on <time itemprop="datePublished" datetime="<?php echo get_the_date('c');?>"><?php the_time(); ?></time> in <a href="<?php echo esc_url( get_category_link( $cats[0]->term_id ) );?>"><?php echo $cats[0]->name; ?></a> with <?php comments_popup_link('0 comment', '1 comment', '% comment'); ?></div>
+					<div class="meta">发表于 <time itemprop="datePublished" datetime="<?php echo get_the_date('c');?>"><?php the_time(); ?></time>&nbsp;&nbsp;&nbsp;&nbsp; 分类:  <a href="<?php echo esc_url( get_category_link( $cats[0]->term_id ) );?>"><?php echo $cats[0]->name; ?></a>    <?php comments_popup_link('0 comment', '1 comment', '% comment'); ?></div>
 				</header>
 				<div class="entry-content <?php echo $shadow.' ' .$max; ?>" itemprop="articleBody">
 					<?php the_content(); ?>

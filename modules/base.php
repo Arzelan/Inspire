@@ -232,7 +232,7 @@ function post_excerpt( $post = false, $excerpt_length = 233 ) {
         $post_content = do_shortcode( $post_content );
         $post_content = wp_strip_all_tags( $post_content );
 	if(post_password_required()){
-	$post_excerpt = '加密文章';
+	$post_excerpt = '竟然要密码才能访问，这里面会有什(jiao)么(yi)？ ≖‿≖✧';
 	}
 	else {
         $post_excerpt = mb_strimwidth( $post_content, 0, $excerpt_length, ' ...', 'utf-8' );
@@ -330,10 +330,11 @@ function changes_protected_title_prefix() {
 function changes_password_protected( $content ) {
     global $post;
     if ( ! empty( $post->post_password ) && stripslashes( $_COOKIE['wp-postpass_'.COOKIEHASH] ) != $post->post_password ) {
-        $output = '<form action="' . get_option( 'siteurl' ) . '/wp-login.php?action=postpass" method="post" class="post-password-form">';
+        $output = '<div class="post-password-form">';
+	$output .= '看来要有神秘代码才能解除封印..<br><br>';
         $output .= '<input name="post_password" class="input" type="password" size="25" placeholder="输入密码" />';
         $output .= '<input type="submit" name="Submit" class="button" value="' . __( "Continue" ) . '" />';
-        $output .= '</form>';
+        $output .= '</div>';
         return $output;
     }
     else {

@@ -12,7 +12,7 @@ function top_admin() {
 	$temp_email = $_COOKIE['comment_author_email_'.COOKIEHASH];
 	if ( is_user_logged_in() ) {
 		if ( current_user_can( 'publish_posts' ) )
-			echo '<a href="'. esc_url( admin_url( 'post-new.php' ) ) .'" target="_top"><span class="icon">&#xe606;</span>Indite</a>';
+			echo '<a onclick="window.open(\''. esc_url( admin_url( 'post-new.php' ) ) .'\')" target="_blank"><span class="icon">&#xe606;</span>Indite</a>';
 		else
 			echo '<a href="'. esc_url( admin_url( 'profile.php' ) ) .'" target="_top"><span class="icon">&#xe65a;</span>You</a>';
 	}

@@ -377,6 +377,8 @@ App = {
 				tips_update('登录异常：验证码错误');
 			}
 			else {
+				info=e
+				tips=tips_update	
 				$.ajax({
 					type: 'POST',
 					url:$('#redirect_to').val()+'wp-login.php',
@@ -392,7 +394,7 @@ App = {
 						}else{
 							e.preventDefault();
 							tips_update('登陆成功，即将刷新页面! :）');
-							setTimeout('window.location.href=$("#redirect_to").val()','5000')
+							window.location.href=$("#redirect_to").val()
 						}
 					}
 
@@ -406,7 +408,49 @@ App = {
         POWERMODE.shake = false; // turn off shake
         document.body.addEventListener('input', POWERMODE)
     },
+    Passport:function(){
+	$("body").delegate("input[name='Submit']","click",function (e) {
+        now=$(this)
+        $.ajax({
+                type: 'POST',
+                url:'/wp-login.php?action=postpass',
+                data:{
+                        post_password:$('input[name="post_password"]').val(),
+                },
+                success:function (msg) {
+                        var message=$(msg)
+                        //获取选取元素的父ID
+                        p_id=now.parent().parent().parent().parent().attr("id");
+                        //获取文章的ID号
+                        p_id2=p_id.split("-")[1]
+                        //获取输入密码返回的html代码，筛选id号的部分
+                        p_conent=message.find("#"+p_id).html();
+                        console.warn(msg)
+                        //判断是否存在关键字，虽然很low，但暂时没别的办法
+                        if(p_conent.indexOf("≖‿≖✧")>=1){
+                           e.preventDefault();
+                           tips_update('神秘代码不正确! :（');
+                       }else{
+                           $("#"+p_id).html(p_conent);
+                           $.ajax({
+                                type: 'POST',
+                                url:'/',
+                                data:{
+                                        action:"ajax_content_post",
+                                        id:p_id2
+                                },
+                                success:function(data){
+                                        $("div[itemprop='articleBody']").html($(data).find("div[itemprop='articleBody']").html());
+                                }
 
+                       })}
+
+                }
+
+        })
+   });
+
+	},
     Bgvideo: function() {
     	_video = $('#bgvideo video');
     	if (_video.length > 0 && E.bgv == 'autoplay') {
@@ -447,7 +491,7 @@ hljs.initHighlightingOnLoad();
 App.Input();
 App.Bgvideo();
 App.Postindex();
-
+App.Passport();
 if ( $('.no-asynchronous')[0] ) {
     $(document).pjax('a[target!=_top]', '#container', {
         fragment: '#container',
