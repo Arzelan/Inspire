@@ -1,0 +1,75 @@
+@charset "utf-8";
+/*
+ * player setting
+ */
+.setting-inner {
+	max-width: 640px;
+	margin: 5em auto 3em;
+	padding: 2em;
+	border-radius: 4px;
+	background-color: #ddd
+}
+
+.setting-inner .title {
+	text-align: center;
+	margin-bottom: 2em
+}
+
+.get-json {
+	margin: 1em 0;
+}
+
+.get-json #mid,
+#music-type {
+	width: 12em;
+	padding: 0 10px;
+    height: 36px;
+    line-height: 36px;
+    box-sizing: content-box;
+    border-radius: 3px;
+}
+
+#music-type {
+	width: 4em;
+	display: inline-block;
+    vertical-align: bottom;
+}
+
+.get-json .button {
+	padding: 5px 25px;
+    height: 37px;
+    line-height: 1;
+    display: inline-block;
+    vertical-align: baseline;
+}
+
+.sava-setting {
+	text-align: right;
+}
+
+.sava-setting .json-data {
+	width: 100%;
+	padding: 5px;
+}
+
+.sava-setting .checkbox-menu {
+	text-align: left;
+	display: inline-block;
+    width: 100%;
+}
+
+.sava-setting .checkbox-menu input {
+	border-radius: 100%;
+	vertical-align: sub
+}
+
+.sava-setting .checkbox-menu span {
+	margin-left: 5px;
+}
+
+.sava-setting input.button {
+	height: auto;
+	padding: 8px 20px;
+	border-radius: 3px;
+	float: right;
+}
