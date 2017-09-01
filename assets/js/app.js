@@ -377,7 +377,26 @@ App = {
 				tips_update('登录异常：验证码错误');
 			}
 			else {
-				return;
+				$.ajax({
+					type: 'POST',
+					url:$('#redirect_to').val()+'wp-login.php',
+					data:{
+						log:$('#log').val(),
+						pwd:$('#pwd').val(),
+						redirect_to:$('#redirect_to').val()
+					},
+					success:function (msg) {
+						if(msg.indexOf("Sign in")>=1){
+							e.preventDefault();
+                                                        tips_update('登陆失败，请检查账号密码! :（');
+						}else{
+							e.preventDefault();
+							tips_update('登陆成功，即将刷新页面! :）');
+							setTimeout('window.location.href=$("#redirect_to").val()','5000')
+						}
+					}
+
+				})
 			}
 		});
 	},

@@ -53,3 +53,19 @@ function theme_scripts() {
         'comment' => array( 'edit' => commentEdit() ),
 	));
 }
+add_filter('logout_url', 'ludou_logout_redirect', 10, 2);
+function ludou_logout_redirect($logouturl, $redir) {
+  $redir = '/'; // 这里改成你要跳转的网址
+  return $logouturl . '&redirect_to=' . urlencode($redir);
+}
+add_action('wp_login_failed', 'my_front_end_login_fail');
+function my_front_end_login_fail($username){
+	// 获取提交数据的来源页面
+	$referrer = $_SERVER['HTTP_REFERER'];
+	// 如果是一个有效的来源，并且不是默认登录页面或后台管理页面
+	if(!empty($referrer) && !strstr($referrer,'wp-login') && !strstr($referrer,'wp-admin')){
+		// 追加一些信息（login=failed）到链接中，让主题使用
+		wp_redirect('/');
+		exit;
+	}
+}

@@ -231,7 +231,12 @@ function post_excerpt( $post = false, $excerpt_length = 233 ) {
         $post_content = $post->post_content;
         $post_content = do_shortcode( $post_content );
         $post_content = wp_strip_all_tags( $post_content );
+	if(post_password_required()){
+	$post_excerpt = '加密文章';
+	}
+	else {
         $post_excerpt = mb_strimwidth( $post_content, 0, $excerpt_length, ' ...', 'utf-8' );
+	}
     }
 
     $post_excerpt = wp_strip_all_tags( $post_excerpt );

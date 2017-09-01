@@ -242,9 +242,9 @@ function login_protection() {
 
 /**
  * 增加额外登录验证
- */
 if ( cs_get_option( 'login_auth' ) )
 	add_action( 'login_init','wlp_basic_auth' );
+ */
 function wlp_basic_auth() {
 	if ( cs_get_option( 'login_auth_custom' ) ) {
 		$name = cs_get_option( 'login_auth_name' );

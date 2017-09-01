@@ -193,6 +193,8 @@ function ajax_avatar_url() {
 
 /**
  * Ajax 登录框
+		<form action="<?php echo home_url(); ?>/wp-login.php" method="post">
+		</form>
  */
 add_action( 'init', 'ajax_login' );
 function ajax_login() {
@@ -206,16 +208,14 @@ function ajax_login() {
 		<div class="login-heading">
 			<h3>身份验证</h3>
 		</div>
-		<form action="<?php echo home_url(); ?>/wp-login.php" method="post">
 			<p><input type="text" name="log" id="log" class="textinput" value="<?php echo $_POST['log']; ?>" size="25" placeholder="Name" required /></p>
 			<p><input type="password" name="pwd" id="pwd" class="textinput" value="<?php echo $_POST['pwd']; ?>" size="25" placeholder="Password" required /></p>
 			<p><input type="text" name="validate" id="validate" class="textinput" value="" size="25" placeholder="<?php echo $num1; ?> + <?php echo $num2; ?> = ?" required /></p>
-			<input type="hidden" name="redirect_to" value="<?php echo $url; ?>" />
+			<input type="hidden" name="redirect_to" id="redirect_to" value="<?php echo $url; ?>" />
 			<input type="hidden" name="num1" value="<?php echo $num1; ?>" id="num1" />
 			<input type="hidden" name="num2" value="<?php echo $num2; ?>" id="num2" />
 			<input type="hidden" name="num3" value="<?php echo $num3; ?>" id="num3" />
-			<p><button id="button" name="submit" type="submit"><span>Continue</span></button></p>
-		</form>
+			<p><button id="button" name="submit"<span>Continue</span></button></p>
 	</div>
 	<?php 
 		die();
