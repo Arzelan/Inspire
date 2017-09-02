@@ -40,7 +40,7 @@ function top_admin() {
  */
 function posts_paging() {
 	$output = '<div id="pagination">';
-	$output .= '<div class="posts-paging">'. get_next_posts_link( '<i class="dot"></i><i class="dot"></i><i class="dot"></i>' ) .'</div>';
+	$output .= '<div id="posts-paging" class="posts-paging">'. get_next_posts_link( '<i class="dot"></i><i class="dot"></i><i class="dot"></i>' ) .'</div>';
 	$output .= '</div>';
 	echo $output;
 }

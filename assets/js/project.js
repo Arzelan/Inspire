@@ -152,7 +152,7 @@ function tips_remove() {
 }
 
 function tips_update(content) {
-    tips_add('New Notification');
+    tips_add('新消息&nbsp;&nbsp;&nbsp;');
     win = $('#notification');
     info = $('#notification .info');
     if ( info.hasClass('has') ) {

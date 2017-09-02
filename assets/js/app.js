@@ -303,8 +303,7 @@ App = {
 
 		    return false;
 		});
-	},
-
+	},	
 	// ~~~ 评论列表分页
 	commentsPaging:function() {
 		$('body').on('click', '.comments-paging a.page-numbers', function(e) {
@@ -377,8 +376,6 @@ App = {
 				tips_update('登录异常：验证码错误');
 			}
 			else {
-				info=e
-				tips=tips_update	
 				$.ajax({
 					type: 'POST',
 					url:$('#redirect_to').val()+'wp-login.php',
@@ -390,7 +387,13 @@ App = {
 					success:function (msg) {
 						if(msg.indexOf("Sign in")>=1){
 							e.preventDefault();
-                                                        tips_update('登陆失败，请检查账号密码! :（');
+							$.ajax({
+								type:'GET',
+								url:'wp-login.php?passport=233',
+								success:function(m){
+									tips_update($(m).find('#login_error').html());
+								}
+							})
 						}else{
 							e.preventDefault();
 							tips_update('登陆成功，即将刷新页面! :）');
@@ -624,3 +627,17 @@ $.fn.Like = function() {
 $(document).on("click", ".ilike", function() {
     $(this).Like();
 });
+$(window).scroll(function () {
+        var scrollTop = $(this).scrollTop();
+        var scrollHeight = $(document).height();
+        var windowHeight = $(this).height();
+	function s(){
+		$("#posts-paging").find('a').attr('disabled',false);
+	}
+        if (scrollTop + windowHeight == scrollHeight) {
+		if($("#posts-paging").find('a').attr("disabled")!="disabled"){
+			$("#posts-paging").find('a').trigger("click").attr('disabled',true);
+			setTimeout(s,1000);
+		}
+	}
+})
